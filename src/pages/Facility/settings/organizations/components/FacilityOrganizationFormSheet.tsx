@@ -192,7 +192,9 @@ export default function FacilityOrganizationFormSheet({
               name="name"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>{t("name")}</FormLabel>
+                  <FormLabel className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    {t("name")}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -209,7 +211,9 @@ export default function FacilityOrganizationFormSheet({
               name="org_type"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel>{t(`type`)}</FormLabel>
+                  <FormLabel className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                    {t(`type`)}
+                  </FormLabel>
                   <Select value={field.value} onValueChange={field.onChange}>
                     <FormControl>
                       <SelectTrigger>
@@ -258,7 +262,14 @@ export default function FacilityOrganizationFormSheet({
               >
                 {t("cancel")}
               </Button>
-              <Button type="submit" disabled={isPending}>
+              <Button
+                type="submit"
+                disabled={
+                  isPending ||
+                  !form.formState.isDirty ||
+                  !form.formState.isValid
+                }
+              >
                 {isPending
                   ? isEditMode
                     ? t("updating")

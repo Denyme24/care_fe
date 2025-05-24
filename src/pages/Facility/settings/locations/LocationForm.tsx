@@ -281,7 +281,9 @@ export default function LocationForm({
             <FormItem
               className={showBedOptions ? "md:col-span-1" : "md:col-span-2"}
             >
-              <FormLabel>{t("location_form")}</FormLabel>
+              <FormLabel className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                {t("location_form")}
+              </FormLabel>
               <Select
                 onValueChange={(value) => {
                   field.onChange(value);
@@ -372,7 +374,9 @@ export default function LocationForm({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("name")}</FormLabel>
+              <FormLabel className="after:content-['*'] after:ml-0.5 after:text-red-500">
+                {t("name")}
+              </FormLabel>
               <FormControl>
                 <Input {...field} data-cy="location-name-input" />
               </FormControl>
@@ -554,7 +558,10 @@ export default function LocationForm({
         <Button
           type="submit"
           disabled={Boolean(
-            isPending || (location?.id && !form.formState.isDirty),
+            isPending ||
+              (location?.id && !form.formState.isDirty) ||
+              (!location?.id && !form.formState.isDirty) ||
+              !form.formState.isValid,
           )}
         >
           {isPending ? (
